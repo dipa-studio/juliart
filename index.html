@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuliArt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="/images/logo/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo/favicon.svg" />
+    <link rel="shortcut icon" href="/images/logo/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Juliart" />
+    <link rel="manifest" href="/images/logo/site.webmanifest" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("HQBPYlBD4_xDEVWVQ"); //public key
+        })();
+    </script>
+</head>
+<script>
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > window.innerHeight * 0.1) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    </script>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Juliart</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="https://etsy.com/shop/JulDHandCraft" class="etsy-btn" target="_blank">Etsy Shop</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Juliart</h1>
+            <p>Egyedi festmények, és alkotások. </p>
+            <a href="#gallery" class="cta-btn">Fedezd fel</a>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="gallery-grid">
+            <div class="art-card">
+                <img src="./images/eternel_tree.webp" alt="Művészet">
+                <div class="art-info">
+                    <h3>Eternal Tree</h3>
+                    <p>29.00 €</p>
+                    <a href="https://www.etsy.com/listing/1846986944/eternal-tree" class="buy-btn" target="_blank">Vásárlás</a>
+                </div>
+            </div>
+            <div class="art-card">
+                <img src="./images/golden_jungle.webp" alt="Művészet">
+                <div class="art-info">
+                    <h3>Golden Jungle</h3>
+                    <p>29.00 €</p>
+                    <a href="https://www.etsy.com/listing/1861210619/golden-jungle" class="buy-btn" target="_blank">Vásárlás</a>
+                </div>
+            </div>
+            <div class="art-card">
+                <img src="./images/midnight_ballon.webp" alt="Művészet">
+                <div class="art-info">
+                    <h3>Midnight Ballon</h3>
+                    <p>29.00 €</p>
+                    <a href="https://www.etsy.com/listing/1861292699/midnight-ballon" class="buy-btn" target="_blank">Vásárlás</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="./images/about.webp" alt="Művész">
+            </div>
+            <div class="about-content">
+                <h2>Rólam</h2>
+                <p>--generált szöveg--Szenvedélyes művész vagyok, aki a természet és az absztrakt művészet határán alkot. Minden festményem egy egyedi történetet mesél el, amely a néző képzeletét és érzelmeit hivatott megmozgatni.</p>
+                <p>Művészetem középpontjában a színek és formák harmóniája áll, amelyek együtt egy különleges vizuális élményt teremtenek.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Kapcsolat</h2>
+                <p>Keress bátran, ha kérdésed van!</p>
+                <div class="contact-details">
+                    <p>Email: testjuliart@outlook.com</p>
+                    <p>Tel: Hamarosan...</p>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="user_name" placeholder="Neved" required>
+                <input type="email" name="user_email" placeholder="Email címed" required>
+                <textarea name="message" placeholder="Üzeneted..." required></textarea>
+                <button type="submit" class="submit-btn">Küldés</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="language-selector">
+                <button class="lang-btn active" data-lang="hu">HU</button>
+                <span class="lang-divider">|</span>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <p>&copy; 2024 Juliart - Minden jog fenntartva</p>
+        </div>
+    </footer>
+
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const btn = document.querySelector('.submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Küldés...';
+
+        const templateParams = {
+            from_name: this.user_name.value,
+            from_email: this.user_email.value,
+            message: this.message.value
+        };
+
+        emailjs.send('service_ja88qym', 'template_16o1qo6', templateParams)
+            .then(function() {
+                btn.textContent = 'Elküldve!';
+                document.getElementById('contactForm').reset();
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = 'Küldés';
+                }, 3000);
+            }, function(error) {
+                btn.textContent = 'Hiba történt!';
+                console.log('Error:', error);
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = 'Küldés';
+                }, 3000);
+            });
+    });
+    </script>
+    <script src="js/translations.js"></script>
+</body>
+</html> 
