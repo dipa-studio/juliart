@@ -1,6 +1,6 @@
 {
-  "name": "Juliart",
-  "short_name": "Juliart",
+  "name": "JuliArtApp",
+  "short_name": "JuliArt",
   "icons": [
     {
       "src": "/images/logo/web-app-manifest-192x192.png",
